@@ -1,65 +1,82 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Navbar from "./components/Navbar";
+import ServiceSection from "./components/ServiceSection"; // TS
+import Testimonial from "./components/Testimonial"; // JSX
+import Footer from "./components/Footer";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // end the animation after 1.2s
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="w-full bg-white text-gray-900 overflow-x-hidden relative">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* HERO Section (Fixed) */}
+      <section className="fixed top-0 left-0 w-full h-screen z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+
+        <div className="absolute inset-0 bg-black/30"></div>
+
+        <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
+          <div className="text-white max-w-2xl">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Quark Creation
+            </h1>
+            <p className="text-lg md:text-xl mb-8">
+              A modern video editing & creative agency helping brands grow with clean visuals and fast turnarounds.
+            </p>
+            <button className="px-8 py-4 rounded-2xl bg-yellow-400 text-gray-900 font-bold text-lg hover:scale-105 hover:shadow-xl transition transform">
+              Get Started
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        {/* Curtain overlay animation */}
+        {loading && (
+          <motion.div
+            className="absolute top-0 left-0 w-full h-full bg-white z-20"
+            initial={{ y: 0 }}
+            animate={{ y: "-100%" }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          />
+        )}
+      </section>
+
+      {/* Spacer for fixed hero */}
+      <div className="h-screen"></div>
+
+      {/* Service Section */}
+      <div className="relative z-20 min-h-screen flex items-center justify-center py-32 bg-gray-50">
+        <ServiceSection />
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="relative z-20 min-h-screen flex items-center justify-center py-32 bg-gray-900">
+        <Testimonial />
+      </div>
+
+      {/* Footer */}
+      <div className="relative z-20">
+        <Footer />
+      </div>
+    </main>
   );
 }
