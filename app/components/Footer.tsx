@@ -17,17 +17,17 @@ const Footer = () => {
           <h3 className="text-xl font-bold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#hero" className="hover:text-white transition">
+              <a href="/" className="hover:text-white transition">
                 Home
               </a>
             </li>
             <li>
-              <a href="#services" className="hover:text-white transition">
+              <a href="/portfolio" className="hover:text-white transition">
                 Services
               </a>
             </li>
             <li>
-              <a href="#contact" className="hover:text-white transition">
+              <a href="/contact" className="hover:text-white transition">
                 Contact
               </a>
             </li>
@@ -40,8 +40,8 @@ const Footer = () => {
           <p>Phone: +977 9808476191</p>
 
           <div className="flex justify-center md:justify-start mt-4 space-x-4">
-            <a href="#" className="hover:text-white transition">Facebook</a>
-            <a href="#" className="hover:text-white transition">Instagram</a>
+            <a href="https://www.instagram.com/sherpabishal147/" className="hover:text-white transition">Facebook</a>
+            <a href="https://www.instagram.com/sherpabishal147/" className="hover:text-white transition">Instagram</a>
             <a href="#" className="hover:text-white transition">YouTube</a>
           </div>
         </div>

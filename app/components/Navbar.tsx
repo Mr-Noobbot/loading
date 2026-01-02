@@ -1,40 +1,52 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
 
   const links = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Portfolio", href: "/portfolio" },
+    { name: "Portfolio", href: "/portfolio" }, // just an id
     { name: "Contact", href: "/contact" },
   ];
+
+  // ✅ Smooth scroll function
+  const handleScroll = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const yOffset = -100; // adjust for fixed navbar height
+      const y =
+        el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    setIsOpen(false); // close mobile menu if open
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-gray-800 text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold">
+        <a href="/" className="text-2xl font-bold">
           QuarkCreation
-        </Link>
+        </a>
 
         {/* Desktop menu */}
         <div className="hidden md:flex gap-6">
           {links.map((link) => (
-            <Link
+            <button
               key={link.name}
-              href={link.href}
-              className={`hover:text-gray-300 ${
-                pathname === link.href ? "font-semibold text-yellow-400" : ""
-              }`}
+              onClick={() =>
+                link.href.startsWith("#") || link.href === "portfolio"
+                  ? handleScroll("portfolio")
+                  : (window.location.href = link.href)
+              }
+              className="hover:text-gray-300 font-medium"
             >
               {link.name}
-            </Link>
+            </button>
           ))}
         </div>
 
@@ -64,16 +76,17 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden flex flex-col gap-4 bg-gray-800 px-4 py-6">
           {links.map((link) => (
-            <Link
+            <button
               key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`hover:text-gray-300 ${
-                pathname === link.href ? "font-semibold text-yellow-400" : ""
-              }`}
+              onClick={() =>
+                link.href.startsWith("#") || link.href === "portfolio"
+                  ? handleScroll("portfolio")
+                  : (window.location.href = link.href)
+              }
+              className="hover:text-gray-300 font-medium text-left"
             >
               {link.name}
-            </Link>
+            </button>
           ))}
         </div>
       )}

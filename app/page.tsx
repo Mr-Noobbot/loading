@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import ServiceSection from "./components/ServiceSection"; // TS
+import portfolio from "./components/portfolio";
 import Testimonial from "./components/Testimonial"; // JSX
 import Footer from "./components/Footer";
 
@@ -44,7 +45,7 @@ export default function Home() {
               A modern video editing & creative agency helping brands grow with clean visuals and fast turnarounds.
             </p>
             <button className="px-8 py-4 rounded-2xl bg-yellow-400 text-gray-900 font-bold text-lg hover:scale-105 hover:shadow-xl transition transform">
-              Get Started
+              Start Trial
             </button>
           </div>
         </div>
