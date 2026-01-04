@@ -63,12 +63,16 @@ const ServiceSection = () => {
 
   // Load Instagram embed script
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.instagram.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => document.body.removeChild(script);
-  }, [selectedService]);
+  const script = document.createElement("script");
+  script.src = "https://www.instagram.com/embed.js";
+  script.async = true;
+  document.body.appendChild(script);
+
+  // Cleanup function
+  return () => {
+    document.body.removeChild(script); // just remove, no return
+  };
+}, [selectedService]);
 
   return (
     <section id="services" className="py-32 bg-gray-50">
