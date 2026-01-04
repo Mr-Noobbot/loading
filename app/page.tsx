@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import ServiceSection from "./components/ServiceSection"; // TS
-import portfolio from "./components/portfolio";
+import portfolio from "./portfolio/page";
 import Testimonial from "./components/Testimonial"; // JSX
 import Footer from "./components/Footer";
 
@@ -31,7 +31,7 @@ export default function Home() {
           playsInline
           className="absolute top-0 left-0 w-full h-full object-cover"
         >
-          <source src="/hero.mp4" type="video/mp4" />
+          <source src="/Renderrevel.mp4" type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/30"></div>
@@ -44,9 +44,15 @@ export default function Home() {
             <p className="text-lg md:text-xl mb-8">
               A modern video editing & creative agency helping brands grow with clean visuals and fast turnarounds.
             </p>
-            <button className="px-8 py-4 rounded-2xl bg-yellow-400 text-gray-900 font-bold text-lg hover:scale-105 hover:shadow-xl transition transform">
-              Start Trial
-            </button>
+            <button
+  onClick={() =>
+    window.open("https://www.instagram.com/sherpabishal147/", "_blank")
+  }
+  className="px-8 py-4 rounded-2xl bg-yellow-400 text-gray-900 font-bold text-lg hover:scale-105 hover:shadow-xl transition transform"
+>
+  Start Trial
+</button>
+
           </div>
         </div>
 

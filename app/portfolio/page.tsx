@@ -21,12 +21,12 @@ const portfolioData = [
   {
     title: "Short Form Content",
     videos: [
-      "/shorts/short1.mp4",
-      "/shorts/short2.mp4",
-      "/shorts/short3.mp4",
-      "/shorts/short4.mp4",
-      "/shorts/short5.mp4",
-      "/shorts/short6.mp4",
+      "/short3.mp4",
+      "/short1.mp4",
+      "/short4.mov",
+      "/short5.mp4",
+      "/short6.mp4",
+      "/short2.mp4",
     ],
     images: [],
   },
@@ -40,6 +40,9 @@ const portfolioData = [
       "/images/t4.jpg",
       "/images/t5.jpeg",
       "/images/t6.jpeg",
+      "/images/t7.jpeg",
+      "/images/t8.jpeg",
+      "/images/t9.jpg",
     ],
   },
 ];
@@ -79,15 +82,19 @@ export default function PortfolioPage() {
 
         {/* Gallery */}
         <div className="max-w-6xl mx-auto px-4 md:px-0">
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {selectedCategory && (
               <motion.div
                 key={selectedCategory.title}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 40 }}
-                transition={{ duration: 0.5 }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                exit={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className={`grid gap-6 ${
+                  selectedCategory.title === "Short Form Content"
+                    ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                    : "grid-cols-1 md:grid-cols-3"
+                }`}
               >
                 {/* Videos */}
                 {selectedCategory.videos.map((video, i) => {
@@ -95,9 +102,12 @@ export default function PortfolioPage() {
                     return (
                       <motion.div
                         key={i}
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
                         className="w-full aspect-video rounded-2xl shadow-lg border-2 border-gray-700 overflow-hidden"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
                       >
                         <iframe
                           src={video.split("?")[0]}
@@ -110,14 +120,22 @@ export default function PortfolioPage() {
                       </motion.div>
                     );
                   } else {
+                    // Short Form Content vertical video format
                     return (
                       <motion.video
                         key={i}
+                        layout
                         src={video}
                         controls
-                        className="w-full rounded-2xl shadow-lg border-2 border-gray-700"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
+                        className={`w-full rounded-2xl shadow-lg border-2 border-gray-700 object-cover ${
+                          selectedCategory.title === "Short Form Content"
+                            ? "aspect-[9/16]"
+                            : "aspect-video"
+                        }`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
                       />
                     );
                   }
@@ -127,11 +145,14 @@ export default function PortfolioPage() {
                 {selectedCategory.images.map((img, i) => (
                   <motion.img
                     key={i}
+                    layout
                     src={img}
                     alt={`${selectedCategory.title} ${i + 1}`}
                     className="w-full rounded-2xl shadow-lg border-2 border-gray-700 object-cover cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
                     onClick={() => setLightboxImage(img)}
                   />
                 ))}

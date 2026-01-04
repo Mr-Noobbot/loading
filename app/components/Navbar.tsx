@@ -30,7 +30,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
         {/* Logo */}
         <a href="/" className="text-2xl font-bold">
-          QuarkCreation
+         <img
+        src="/textlogo.png" // replace with your actual logo path
+        alt="QuarkCreation Logo"
+        className="h-12 w-auto transform scale-400 md:scale-500 origin-left -translate-x-4 md:-translate-x-20"
+      />
         </a>
 
         {/* Desktop menu */}
